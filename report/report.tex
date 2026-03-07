@@ -20,6 +20,43 @@ Phase 1 demonstrates race conditions using multiple teller threads in an account
 
 \subsection{Program Outputs}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{phase1-1.png}
+\caption{Phase 1 Program Compilation}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{phase1-2.png}
+\caption{Phase 1 Program Execution Run 1}
+\end{figure} 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{phase1-3.png}
+\caption{Phase 1 Program Execution Run 2}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{phase1-4.png}
+\caption{Phase 1 Program Execution Run 3}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{phase1-5.png}
+\caption{Phase 1 Program Execution Run 4}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{phase1-6.png}
+\caption{Phase 1 Program Execution Run 5}
+\end{figure}
+
+
 \subsection{Reflection Questions}
 \textbf{Q1.1 - Race Condition Evidence} 
 
@@ -74,6 +111,13 @@ Non-deterministic behavior means that a program with the same inputs produces di
 \subsection{Program Description}
 Phase 2 improved our program from Phase 1 by including mutex locks to protect shared data. Each bank account now has mutex locks which a thread must aquire before modifying the account balance. After aquiring the lock and making their changes to the account, the lock is released. This prevents race conditions and ensures only one thread at a time can change and account.
 
+\subsection{Program Output}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{phase2-1.png}
+\caption{Phase 2 output}
+\end{figure}
+
 \subsection{Reflection Questions}
 
 \textbf{Q2.1 Correctness Verification}
@@ -109,6 +153,13 @@ Each account has its own mutex to allow multiple threads to alter each account s
 
 \subsection{Program Description}
 Phase 3 demonstrates how a deadlock occurs when multiple threads attempt to lock shared resources. In this program a thread needed to lock the source and destination, but got stuck when it only had one lock and another thread had the other. Both threads were stuck waiting on each other's lock causing a deadlock.
+
+\subsection{Program Output}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{phase3-1.png}
+\caption{Phase 3 output}
+\end{figure}
 
 \subsection{Reflection Questions}
 
@@ -193,7 +244,14 @@ Source: UNP Education. (2025). \textit{Suprising Real-Life Examples of Deadlock 
 
 \subsection{Program Description}
 In phase 4, deadlock is prevented using the lock ordering strategy. 
-``
+
+\subsection{Program Output}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{phase4-1.png}
+\caption{Phase 4 output}
+\end{figure}
+
 \subsection{Reflection Questions}
 
 \textbf{Q4.1 Breaking Circular Wait}
