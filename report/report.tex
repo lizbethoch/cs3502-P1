@@ -104,4 +104,88 @@ Each account has its own mutex to allow multiple threads to alter each account s
 
 \bigskip
 
+\section{Phase 3: Deadlock Creation}
+
+\subsection{Program Description}
+Phase 3 demonstrates how a deadlock occurs when multiple threads attempt to lock shared resources. In this program a thread needed to lock the source and destination, but got stuck when it only had one lock and another thread had the other. Both threads were stuck waiting on each other's lock causing a deadlock.
+
+\subsection{Reflection Questions}
+
+\textbf{Q3.1 Coffman Conditions}
+
+\textbf{Answer:}
+Deadlock occurs when all four Coffman conditions are met:
+
+\textbf{1.Mutual Exclusion}
+Each bank account is protected by a mutex lock. This prevents mutlitple threads from changing a same account simultaneously.
+\begin{lstlisting}[language=C]
+pthread_mutex_lock(&accounts[from_id].lock);
+\end{lstlisting}
+
+\textbf{2.Hold and Wait}
+A thread would lock one account and then will try to lock another while still having the first lock.
+\begin{lstlisting}[language=C]
+pthread_mutex_lock(&accounts[from_id].lock);
+pthread_mutex_lock(&accounts[to_id].lock);
+\end{lstlisting}
+
+\textbf{3.No Preemption}
+If a thread aquires a lock then it cannot be taken away unless it releases it.
+\begin{lstlisting}[language=C]
+pthread_mutex_unlock(&accounts[from_id}.lock);
+\end{lstlisting}
+
+\textbf{4.Circular Wait}
+This is when two threads wait on each other in a circular chain. It prevents either thread from continuing.
+\begin{itemize}
+\item Thread 1 holds Account 0 and waits for Account 1
+\item Thread 2 holds Account 1 and waits for Account 0
+\end{itemize}
+
+\bigskip
+
+\textbf{Q3.2 Resource Allocation Graph}
+
+\textbf{Answer:}
+Resource allocation graph:
+\begin{itemize}
+\item Threads are represented as circles.
+\item Accounts are represented as squares.
+\item Holds and waits are represented as arrows.
+\end{itemize}
+
+Deadlock scenario:
+\begin{itemize}
+\item Thread 1 holds Account 0 and waits for Account 1
+\item Thread 2 holds Account 1 and waits for Account 0
+\end{itemize}
+
+Graph representation:
+
+\begin{verbatim}
+      (T1) -----> [Account 1]
+       |              ^
+       |              |
+       v              |
+   [Account 0] <---- (T2)
+\end{verbatim}
+
+\bigskip
+
+\textbf{Q3.3 Deadlock vs Livelock}
+
+\textbf{Answer:}
+Deadlock occurs when two or more threads are permanently blocked waiting waiting for resources that the others hold. In a deadlock, the threads stop and no progress is made.
+Livelock is different because the threads are still running but are still reacting. The threads can release and retry the lcoks but will not be able to complete. Phase 3 only shows a deadlock, it is not considered a livelock because the threads do not release and retr
+
+\bigskip
+
+\textbf{Q3.4 Real-World Example}
+
+\textbf{Answer:}
+One real-world example we do not notice is a deadlock is a busy intersection. Cars are waiting from all points in a circular wait and causes a deadlock.
+Source: UNP Education. (2025). \textit{Suprising Real-Life Examples of Deadlock in DBMS Explained}.
+
+\bigskip
+
 \end{document}
