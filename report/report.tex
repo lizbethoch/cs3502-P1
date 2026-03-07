@@ -1,4 +1,5 @@
 
+
 \documentclass[12pt]{article}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -188,4 +189,38 @@ Source: UNP Education. (2025). \textit{Suprising Real-Life Examples of Deadlock 
 
 \bigskip
 
+\section{Phase 4 : Deadlock Resolution}
+
+\subsection{Program Description}
+In phase 4, deadlock is prevented using the lock ordering strategy. 
+``
+\subsection{Reflection Questions}
+
+\textbf{Q4.1 Breaking Circular Wait}
+
+\textbf{Answer:}
+Lock ordering prevents deadlock by making all threads acquire the locks in order. In our program, the lower lock is aquired before the higher one. This eliminates the Circular wait Coffman condition because all threads have to follow the same order.
+
+\bigskip
+
+\textbf{Q4.2 Strategy Comparison}
+
+\textbf{Answer:}
+To start with lock ordering, it is simple and does not require retries or timeouts. It guarantess and order for the threads to reach the locks. As for timeout mechanisms, threads will retry the locks within a certain time limit. This may cause a decrease in performance because of threads constantly trying to aquire locks. Lastly, for try-lock backoff it retries aquiring the lock after waiting for a short time. This only reduces blocking a bit and increased repeated retries.
+
+\bigskip
+\textbf{Q4.3 Starvation}
+
+\textbf{Answer:}
+Lock ordering does not usually cause starvation because the threads eventually will get the needed lock. Although, if there are many threads that are wanting to aquire the lock they could be delayed if another thread aquires it first.
+
+\bigskip
+\textbf{Q4.4 Production Recommendation}
+
+\textbf{Answer:}
+For a real banking system, I would stick with lock ordering. It prevents deadlocks and is the simplest form to do so. The other strategies require retries or timeouts that could potentially cause problems. Since we know that in lock ordering have a simple pattern, it is easier for the program to be maintained.
+
+\bigskip
+
 \end{document}
+
