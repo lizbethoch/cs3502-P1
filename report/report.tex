@@ -66,4 +66,42 @@ When I removed the pth join calls and ran my program, the main thread terminates
 \textbf{Answer:}
 Non-deterministic behavior means that a program with the same inputs produces different results each time it is ran. This occurs in concurrent programs because the scheduler is what determines which thread executes first, which leads to different results. This makes debugging difficult because an error could not be easily noticed. 
 
+\bigskip
+
+\section{Phase 2 : Mutex Synchronization}
+
+\subsection{Program Description}
+Phase 2 improved our program from Phase 1 by including mutex locks to protect shared data. Each bank account now has mutex locks which a thread must aquire before modifying the account balance. After aquiring the lock and making their changes to the account, the lock is released. This prevents race conditions and ensures only one thread at a time can change and account.
+
+\subsection{Reflection Questions}
+
+\textbf{Q2.1 Correctness Verification}
+
+\textbf{Answer:}
+After running the program 10 times, the total balance remained the same each time. This shows how the race conditions from phase 1 was resolved. In Phase 1, we recieved different totals each time we ran the program which showed how each thread raced and caused the data to be inconsistent. In Phase 2, the mutex locks do not allow that and only allow one thread at a time. This ensured more consistent results from our program.
+
+\bigskip
+
+\textbf{Q2.2 Critical Section}
+
+\textbf{Answer:}
+A critical section is the part of a code where shared resources are accessed or modified. If multiple threads enter this section at the same time, race conditions occur.
+In Phase 2 program, the critical sections occured in side the functions of deposit safe and withdrawal safe. These sections include how the account balances were updated.The mutex locks were inserted before and after to make sure a lock is aquired and released before entering the critical section.
+
+\bigskip
+
+\textbf{Q2.3 Performance Tradeoffs}
+
+\textbf{Answer:}
+Phase 2 program runs slower because of the mutex locks. Each thread must wait for a lock to be aquired after another thread has released the lock. This causes a small wait although is worth it. This is acceptable because it outputs correct results from the program which is needed more than maximum speed. The shared resources must be protected so mutiple threads do not alter it at the same time causing incorrect data.
+
+\bigskip
+
+\textbf{Q2.4 Granularity}
+
+\textbf{Answer:}
+Each account has its own mutex to allow multiple threads to alter each account simultaneously. If a signle global mutex were used for all accounts, only one thread could access any account at a time. This would really slow down a program because all threads would have to wait even when they are wanting to alter a different account.
+
+\bigskip
+
 \end{document}
