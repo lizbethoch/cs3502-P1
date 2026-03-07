@@ -1,0 +1,69 @@
+
+\documentclass[12pt]{article}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{CS 3502 Project 1: Multi-Threaded Programming}
+\author{Lizbeth Ochoa}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Phase 1 : Race Condition}
+
+\subsection{Program Description}
+Phase 1 demonstrates race conditions using multiple teller threads in an accounting system. The teller threads perform deposits and withdrawals on a shared bank accounts with synchronization.
+
+\subsection{Program Outputs}
+
+\subsection{Reflection Questions}
+\textbf{Q1.1 - Race Condition Evidence} 
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Run & Final total Balance \\
+\hline
+1 & 2130 \\
+2 & 1791 \\
+3 & 1924 \\
+4 & 1782 \\
+5 & 2069 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Answer:}
+After running the program 5 times, it is clear that there is a different total each time. The program produces a different total because multiple threads simultaneously access and modify the shared account balances. This is without synchronization. The race condition occurs when the threads read and update the same memory at the same time.
+The critical section occurs in these lines of code:
+
+\begin{lstlisting}[language=C]
+double current_balance = accounts[account_id].balance;
+accounts[account_id].balance = current_balance + amount;
+\end{lstlisting}
+
+\bigskip 
+
+\textbf{Q1.2 Thread vs Process}
+
+\textbf{Answer:}
+A process is it's own program with it's own memory space and resources. While a thread is a smaller unit of execution within a process. Threads share the same memory space as other threads in the same process which is what connects to race conditions.
+
+\bigskip
+
+\textbf{Q1.3 pthread\_join Purpose}
+
+\textbf{Answer:}
+When I removed the pth join calls and ran my program, the main thread terminates and does not wait for the others. So the program becomes an incomplete output. The call is necessary because it makes sure that the main function waits for the rest of the threads to finish.
+
+\bigskip
+
+\textbf{Q1.4 Non-Determinism}
+
+\textbf{Answer:}
+Non-deterministic behavior means that a program with the same inputs produces different results each time it is ran. This occurs in concurrent programs because the scheduler is what determines which thread executes first, which leads to different results. This makes debugging difficult because an error could not be easily noticed. 
+
+\end{document}
