@@ -1,16 +1,32 @@
-CS3502 - Project 1
-Multi-Threaded Programming
+# Concurrent Programming in C
 
-Lizbeth Ochoa
-March 2026
+A concurrent programming project written in C that explores multithreading, race conditions, mutex synchronization, and deadlocks using POSIX threads.
 
-This project demonstrates concepts of concurrent programming in C using the pthread library.
-These are the multiple phases that illustrate the common problems that occur in multi-threaded systems.
+## Overview
 
-Phases:
-1-Race conditions
-2-Mutex Synchronization
-3-Deadlock creation
-4-Deadlock resolution
+This project was completed as part of an operating systems course and focuses on fundamental concepts of concurrent programming.
 
+The project demonstrates how multiple threads can access shared resources, how race conditions can occur when access is not properly synchronized, and how mutexes can be used to coordinate access to shared data.
 
+It also explores deadlock scenarios and approaches for creating and resolving them.
+
+## Concepts Demonstrated
+
+* POSIX threads (`pthreads`)
+* Concurrent programming
+* Shared resources
+* Race conditions
+* Mutex synchronization
+* Thread synchronization
+* Deadlock creation
+* Deadlock resolution
+
+## Technologies
+
+* C
+* POSIX Threads
+* Linux/Unix system programming
+
+## Project Context
+
+This project was completed as coursework for an operating systems class and was designed to provide practical experience with multithreading and synchronization in C.
